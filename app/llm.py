@@ -1,6 +1,8 @@
 # app/llm.py
 import os
-import openai
+from openai import OpenAI
+
+client = OpenAI(api_key=Config.OPENAI_API_KEY)
 import requests
 from datetime import datetime
 from pathlib import Path
@@ -9,7 +11,6 @@ from gtts import gTTS
 from app.config import Config
 
 # Setup API keys & paths.
-openai.api_key = Config.OPENAI_API_KEY
 
 AUDIO_OUTPUT_DIR = Path(Config.AUDIO_OUTPUT_DIR)
 AUDIO_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -62,15 +63,13 @@ class LLMEngine:
         if self.debug:
             print(f"[DEBUG] Generating response for prompt: {prompt}", flush=True)
         try:
-            response = openai.ChatCompletion.create(
-                model=self.model,
-                messages=[
-                    {"role": "system", "content": system_msg},
-                    {"role": "user", "content": prompt}
-                ],
-                temperature=0.85,
-                max_tokens=500
-            )
+            response = client.chat.completions.create(model=self.model,
+            messages=[
+                {"role": "system", "content": system_msg},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.85,
+            max_tokens=500)
             return response.choices[0].message.content
         except Exception as e:
             print(f"[DEBUG] Error generating response: {e}", flush=True)
@@ -90,7 +89,7 @@ class LLMEngine:
         """
         try:
             with open(file_path, "rb") as audio_file:
-                result = openai.Audio.transcribe("whisper-1", audio_file)
+                result = client.audio.transcribe("whisper-1", audio_file)
             return result.text
         except Exception as e:
             print(f"[DEBUG] Whisper transcription error: {e}", flush=True)
