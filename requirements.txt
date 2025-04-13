@@ -1,0 +1,21 @@
+python-dotenv
+Flask
+gunicorn
+gTTS
+openai>=1.0.0
+requests
+celery
+redis
+twilio
+markdown
+pdfkit
+websocket-client
+pytest
+# 🧰 Dev Tools
+python-json-logger
+
+# Optional: These packages are required for specific features.
+# Note: wkhtmltopdf is a system binary; install via your OS package manager or Dockerfile.
+websocket-client
+PyYAML
+pytest

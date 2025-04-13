@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  web:
+    build: .
+    container_name: adhdpapi-web
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./uploads:/app/uploads
+      - ./exports:/app/exports
+      - ./app/static/audio:/app/app/static/audio
+    env_file: .env
+    environment:
+      - SECRET_KEY=${SECRET_KEY}
+      - TWILIO_ACCOUNT_SID=${TWILIO_ACCOUNT_SID}
+      - TWILIO_AUTH_TOKEN=${TWILIO_AUTH_TOKEN}
+      - TWILIO_NUMBER=${TWILIO_NUMBER}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ELEVENLABS_API_KEY=${ELEVENLABS_API_KEY}
+    depends_on:
+      - redis
+    restart: always
+    # Uncomment the following if running in a Linux environment where sysctls are supported 
+    # Remove or comment out the sysctls for Windows
+    # sysctls:
+    #   vm.overcommit_memory: 1
+  redis:
+    image: redis:6.0
+    container_name: adhdpapi-redis
