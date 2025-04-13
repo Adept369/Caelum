@@ -23,9 +23,9 @@ class Config:
     TWILIO_NUMBER = os.getenv("TWILIO_NUMBER")
 
     # Paths & Directories
-    DATABASE_PATH = os.getenv("DATABASE_PATH", "custom_archetypes.db")
+    
     AUDIO_OUTPUT_DIR = os.getenv("AUDIO_OUTPUT_DIR", "app/static/audio")
-    JOURNAL_EXPORT_DIR = os.getenv("JOURNAL_EXPORT_DIR", "exports")
+    
     UPLOAD_DIR = os.getenv("UPLOAD_DIR", "uploads")
 
     # Voice Mapping (for future extensibility; fixed in simplified branch)
