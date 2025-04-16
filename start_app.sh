@@ -6,7 +6,7 @@ mkdir -p app/static/audio uploads exports
 
 # Start ngrok in the background with your desired URL and port
 echo "🌀 Starting ngrok tunnel..."
-ngrok http --url=duck-healthy-easily.ngrok-free.app 5000 --log=stdout > ngrok.log 2>&1 &
+ngrok http --url=https://adhdpapi.ngrok.io 5000 --log=stdout > ngrok.log 2>&1 &
 
 # Give ngrok a few seconds to establish the tunnel
 sleep 5

@@ -9,14 +9,9 @@ services:
       - ./uploads:/app/uploads
       - ./exports:/app/exports
       - ./app/static/audio:/app/app/static/audio
-    env_file: .env
-    environment:
-      - SECRET_KEY=${SECRET_KEY}
-      - TWILIO_ACCOUNT_SID=${TWILIO_ACCOUNT_SID}
-      - TWILIO_AUTH_TOKEN=${TWILIO_AUTH_TOKEN}
-      - TWILIO_NUMBER=${TWILIO_NUMBER}
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
-      - ELEVENLABS_API_KEY=${ELEVENLABS_API_KEY}
+    
+    env_file:
+      - .env
     depends_on:
       - redis
     restart: always
@@ -27,12 +22,17 @@ services:
   
   ngrok:
     image: ngrok/ngrok:latest
-    restart: unless-stopped
+    container_name: caelum-ngrok
+    depends_on:
+      - web
+
+    restart: always
     command:
       - "start"
       - "--all"
       - "--config"
       - "/etc/ngrok.yml"
+      
     volumes:
       - ./ngrok.yml:/etc/ngrok.yml
     ports:

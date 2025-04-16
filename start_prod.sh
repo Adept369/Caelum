@@ -8,7 +8,7 @@
 
 # Set the application port and ngrok domain (if using ngrok for external access)
 APP_PORT=5000
-NGROK_DOMAIN="duck-healthy-easily.ngrok-free.app"
+NGROK_DOMAIN="https://adhdpapi.ngrok.io"
 
 # Load environment variables from .env file (if available)
 if [ -f .env ]; then

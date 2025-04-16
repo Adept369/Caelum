@@ -29,7 +29,7 @@ def generate_audio_message(text_response: str) -> str:
     
     # Construct the media URL using the static domain defined in Config.
     # If Config does not define STATIC_DOMAIN, it defaults to the provided domain.
-    static_domain = getattr(Config, "STATIC_DOMAIN", "https://duck-healthy-easily.ngrok-free.app")
+    static_domain = getattr(Config, "STATIC_DOMAIN", "https://adhdpapi.ngrok.io")
     media_url = f"{static_domain}/static/audio/{audio_filename}"
     return media_url
 
@@ -47,7 +47,7 @@ def send_twilio_message(body: str, recipient: str, media_url: str) -> str:
     """
     client = Client(os.environ.get("TWILIO_ACCOUNT_SID"), os.environ.get("TWILIO_AUTH_TOKEN"))
     twilio_number = os.environ.get("TWILIO_NUMBER")
-    status_callback = getattr(Config, "STATUS_CALLBACK_URL", "https://duck-healthy-easily.ngrok-free.app/status")
+    status_callback = getattr(Config, "STATUS_CALLBACK_URL", "https://adhdpapi.ngrok.io/status")
     message = client.messages.create(
         body=body,
         media_url=[media_url],

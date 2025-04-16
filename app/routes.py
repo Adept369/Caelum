@@ -13,7 +13,7 @@ from markdown import markdown
 import pdfkit
 from app.llm import LLMEngine
 from app.config import Config
-
+from twilio.base.exceptions import TwilioRestException
 
 # --- Ensure required directories exist ---
 audio_dir = Config.AUDIO_OUTPUT_DIR
@@ -63,7 +63,7 @@ def webhook():
     audio_filepath = os.path.join(audio_path, audio_filename)
     tts = gTTS(generated_response)
     tts.save(audio_filepath)
-    media_url = f"https://duck-healthy-easily.ngrok-free.app/static/audio/{audio_filename}"
+    media_url = f"https://adhdpapi.ngrok.io/static/audio/{audio_filename}"
 
     # Send message and audio via Twilio
     client = Client(os.environ.get("TWILIO_ACCOUNT_SID"), os.environ.get("TWILIO_AUTH_TOKEN"))
