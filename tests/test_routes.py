@@ -2,6 +2,11 @@
 import json
 import pytest
 from app import create_app
+from dotenv import load_dotenv
+from app.config import Config
+import os
+# Load environment variables from a .env file if present.
+load_dotenv()
 
 @pytest.fixture
 def client():

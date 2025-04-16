@@ -9,7 +9,7 @@ and archetype databases.
 
 import os
 import logging
-from app.utils.helpers import init_journal_db, init_archetype_db
+
 
 # Set up basic logging configuration
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
@@ -33,20 +33,12 @@ def create_directories():
         except Exception as e:
             logging.error(f"❌ Error creating directory {directory}: {e}")
 
-def initialize_databases():
-    """Initialize SQLite databases and tables."""
-    logging.info("🧠 Initializing journal + archetype tables...")
-    try:
-        init_journal_db()
-        init_archetype_db()
-        logging.info("✅ Database tables ready.")
-    except Exception as e:
-        logging.error(f"❌ Failed to initialize DB tables: {e}")
+
 
 def main():
     """Main function to set up directories and initialize databases."""
     create_directories()
-    initialize_databases()
+   
 
 if __name__ == "__main__":
     main()

@@ -1,4 +1,6 @@
 # Dockerfile for Single-User Caelum ADHD Assistant
+
+
 FROM python:3.9-slim
 
 # Set the working directory
@@ -23,10 +25,10 @@ RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
 # Copy the entire project
 COPY . .
+RUN pip install ngrok
 
 # Expose port 5000
 EXPOSE 5000
-
 # Initialize the database and start the Flask app with Gunicorn
 CMD ["sh", "-c", "python init_system.py && gunicorn run:app --bind 0.0.0.0:5000 --timeout 120"]
 

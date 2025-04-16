@@ -1,0 +1,13 @@
+# Version of the ngrok Agent Configuration file. Required.
+version: 3
+
+# Agent Configuration
+agent:
+  authtoken: 2v9IzsxMBL3pUOf2QZq1WmXaglR_2gV7j5LYDTJ7Sg44VcNGX
+  api_key: ak_2vmsjsCkbRajpHZNdm8PGPbfkUX
+# Endpoint Definitions
+endpoints:
+  - name: adhdpapi
+    url: https://adhdpapi.ngrok.io
+    upstream:
+      url: http://host.docker.internal:5000

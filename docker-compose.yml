@@ -24,6 +24,25 @@ services:
     # Remove or comment out the sysctls for Windows
     # sysctls:
     #   vm.overcommit_memory: 1
+  
+  ngrok:
+    image: ngrok/ngrok:latest
+    restart: unless-stopped
+    command:
+      - "start"
+      - "--all"
+      - "--config"
+      - "/etc/ngrok.yml"
+    volumes:
+      - ./ngrok.yml:/etc/ngrok.yml
+    ports:
+        - 4040:4040
+    # Use a JSON array for the command to expose your web service on port 5000
+
+    
+
+    
+     
   redis:
     image: redis:6.0
     container_name: adhdpapi-redis
